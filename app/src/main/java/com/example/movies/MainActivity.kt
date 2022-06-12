@@ -1,18 +1,18 @@
 package com.example.movies
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.movies.databinding.ActivityMainBinding
-import com.example.movies.view.MainViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.movies.view.MovieAdapter
-import com.example.movies.view.MainViewPagerAdapter
+import com.example.movies.databinding.ActivityMainBinding
+import com.example.movies.view.adapter.MainViewPagerAdapter
+import com.example.movies.view.adapter.MovieAdapter
 import com.example.movies.view.fragment.MoviesFragment
 import com.example.movies.view.fragment.RecommendedFragment
 import com.example.movies.view.fragment.TvFragment
+import com.example.movies.view.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

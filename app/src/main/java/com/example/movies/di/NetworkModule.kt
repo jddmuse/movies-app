@@ -27,7 +27,7 @@ object NetworkModule {
         val authInterceptor = Interceptor { chain ->
             val url = chain.request().url.newBuilder()
                 .addQueryParameter("api_key", API_KEY3)
-                .addQueryParameter("language", "en-US")
+                //.addQueryParameter("language", "en-US")
                 .build()
             val newRequest = chain.request()
                 .newBuilder()

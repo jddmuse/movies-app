@@ -1,14 +1,15 @@
 package com.example.movies.data
 
 import com.example.movies.data.model.MovieModel
+import com.example.movies.data.model.MoviesList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface MovieApiClient {
 
-    @GET()
-    suspend fun getAllMovies(): Response<List<MovieModel>>
+    @GET("3/list/1")
+    suspend fun getAllMovies(): Response<MoviesList>
 
     @GET("3/movie/{movie_id}")
     suspend fun getMovieById(@Path("movie_id") id:Long): Response<MovieModel?>
