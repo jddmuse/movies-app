@@ -13,4 +13,7 @@ interface MovieApiClient {
 
     @GET("3/movie/{movie_id}")
     suspend fun getMovieById(@Path("movie_id") id:Long): Response<MovieModel?>
+
+    @GET("3/list/{movie_id}")
+    suspend fun getMoviesList(@Path("movie_id") id:Long) : Response<MoviesList?>
 }

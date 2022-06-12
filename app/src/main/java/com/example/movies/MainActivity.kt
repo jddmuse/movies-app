@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.example.movies.data.MoviesProvider
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.view.adapter.MainViewPagerAdapter
 import com.example.movies.view.adapter.MovieAdapter
@@ -15,7 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
@@ -31,13 +32,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        movieAdapter = MovieAdapter()
-        initRecyclerView()
+        //movieAdapter = MovieAdapter()
+        //initRecyclerView()
         initViewPager()
 
-        viewModel.moviesLiveData.observe(this, Observer { items ->
+        /*viewModel.moviesLiveData.observe(this, Observer { items ->
             movieAdapter.updateData(items)
-        })
+        })*/
     }
 
     private fun initViewPager() {

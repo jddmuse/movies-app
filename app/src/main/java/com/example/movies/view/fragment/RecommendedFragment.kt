@@ -1,13 +1,11 @@
 package com.example.movies.view.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,11 +16,6 @@ import com.example.movies.util.UIBehavior
 import com.example.movies.view.adapter.MoviesPosterViewPagerAdapter
 import com.example.movies.view.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.*
 
 const val TAG = "::RecommendedFragment -> "
 
