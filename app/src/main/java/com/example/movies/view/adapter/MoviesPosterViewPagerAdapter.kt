@@ -51,7 +51,7 @@ class MoviesPosterViewPagerAdapter: RecyclerView.Adapter<MoviesPosterViewPagerAd
             binding.durationTextView.text = "2h"
             binding.averageTextView.text = item.vote_average.toString()
             binding.popularityTextView.text = item.popularity.toString()
-            Glide.with(itemView).load("$baseUrlImg${item.poster_path}").into(binding.posterImageView)
+            Glide.with(itemView).load("$baseUrlImg${item.poster_path?:""}").into(binding.posterImageView)
         }
     }
 
