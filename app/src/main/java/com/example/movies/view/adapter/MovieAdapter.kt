@@ -18,7 +18,7 @@ private const val TAG = ":::MovieAdapter -> "
 
 class MovieAdapter(
     val itemActionListener: ItemActionListener
-):RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private val moviesList = mutableListOf<Movie>()
 
@@ -39,20 +39,23 @@ class MovieAdapter(
 
     override fun getItemCount(): Int = moviesList.size
 
-    fun updateData(items:List<Movie>){
+    fun updateData(items: List<Movie>) {
         moviesList.clear()
         moviesList.addAll(items)
         Log.d(TAG, "updateData")
         notifyDataSetChanged()
     }
 
-    class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
+    fun isEmpty(): Boolean = moviesList.isEmpty()
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemMovieBinding.bind(view)
 
-        fun bind(item: Movie){
+        fun bind(item: Movie) {
             //binding.titleTextView.text = item.title
-            //Picasso.get().load(item.backdrop_path).into(binding.movieImageView)
-            Glide.with(itemView).load("$baseUrlImg${item.poster_path}").into(binding.movieImageView)
+            //Picasso.get().load("$baseUrlImg${item.poster_path}").into(binding.movieImageView)
+            Glide.with(itemView).load("$baseUrlImg${item.poster_path}")
+                .into(binding.movieImageView)
         }
 
     }

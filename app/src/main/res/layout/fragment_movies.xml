@@ -1,43 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.MoviesFragment">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/header_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_200"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title_list_one_text_view"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_16"
-        android:text="2011 Oscar Nominations for Best Picture"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintTop_toBottomOf="@id/header_view_pager" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_one_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_184"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_4"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/title_list_one_text_view" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_two_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_184"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_16"
-        app:layout_constraintTop_toBottomOf="@id/list_one_recycler_view" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/header_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/title_list_one_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="2011 Oscar Nominations for Best Picture"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintTop_toBottomOf="@id/header_view_pager" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_one_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_184"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_4"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/title_list_one_text_view" />
+
+            <TextView
+                android:id="@+id/title_list_two_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="Marvel Universe Movies"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintTop_toBottomOf="@id/list_one_recycler_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_two_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_184"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/title_list_two_text_view" />
+
+            <TextView
+                android:id="@+id/title_list_three_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="Films Dejavus"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintTop_toBottomOf="@id/list_two_recycler_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_three_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_184"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/title_list_three_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

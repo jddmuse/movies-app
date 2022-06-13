@@ -10,9 +10,12 @@ import com.example.movies.data.model.MovieModel
 @Dao
 interface MovieDAO {
 
-    @Query("SELECT * FROM movie")
+    @Query("SELECT * FROM movie LIMIT 10")
     suspend fun getAllMovies():List<MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items:List<MovieEntity>)
+
+    @Query("DELETE FROM movie")
+    suspend fun deleteAllMovies()
 }

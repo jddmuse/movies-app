@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase,
     private val getMoviesListByIdUseCase: GetMoviesListByIdUseCase
     //private val getMovieByIdUseCase: GetMovieByIdUseCase
-):ViewModel() {
+) : ViewModel() {
 
     val moviesListLiveData = MutableLiveData<MutableList<List<Movie>>>()
 
@@ -33,7 +33,7 @@ class MainViewModel @Inject constructor(
         onCreate()
     }
 
-    private fun onCreate(){
+    private fun onCreate() {
 
     }
 
@@ -42,27 +42,28 @@ class MainViewModel @Inject constructor(
         Log.e(TAG, "Info cleaned")
     }
 
-    fun getMoviesList(context: Context){
+    fun getMoviesList(context: Context, idCollection: Long, callback: (List<Movie>) -> Unit) {
         viewModelScope.launch {
-            val result: List<Movie>? = getMoviesListByIdUseCase(BEST_PICTURES_NOMINATIONS, context)
+            val result: List<Movie>? = getMoviesListByIdUseCase(idCollection, context)
             Log.d(TAG, "getMoviesListByIdUseCase")
-            if(result!=null){
+            if (result != null) {
                 updateData(result)
+                callback(result)
             }
         }
     }
 
-    fun getRecommendedMoviesList(context: Context){
+    fun getRecommendedMoviesList(context: Context) {
         viewModelScope.launch {
             val result: List<Movie>? = getMoviesUseCase(context)
             Log.d(TAG, "getMoviesUseCase")
-            if(result!=null){
+            if (result != null) {
                 updateData(result)
             }
         }
     }
 
-    private fun updateData(item: List<Movie>){
+    private fun updateData(item: List<Movie>) {
         val currentList = moviesListLiveData.value ?: arrayListOf()
         currentList.add(item)
         moviesListLiveData.postValue(currentList)

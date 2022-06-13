@@ -9,12 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import com.example.movies.data.model.baseUrlImg
 import com.example.movies.databinding.FragmentMoviesBinding
 import com.example.movies.domain.model.Movie
 import com.example.movies.util.ItemActionListener
@@ -45,7 +42,10 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var movieAdapterOne: MovieAdapter
+    private lateinit var movieAdapterTwo: MovieAdapter
+    private lateinit var movieAdapterThree: MovieAdapter
+
     private lateinit var headerAdapter: HeaderMoviesViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,22 +72,30 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
     }
 
     override fun initUI() {
-        movieAdapter = MovieAdapter(this)
+        movieAdapterOne = MovieAdapter(this)
+        movieAdapterTwo = MovieAdapter(this)
+        movieAdapterThree = MovieAdapter(this)
         headerAdapter = HeaderMoviesViewPagerAdapter()
 
         initRecyclerView()
         initViewPager2()
 
-        viewModel.getMoviesList(context!!)
+        viewModel.getMoviesList(context!!, BEST_PICTURES_NOMINATIONS){
+            movieAdapterOne.updateData(it)
+        }
 
-        viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer {
-            movieAdapter.updateData(it.last())
+        viewModel.getMoviesList(context!!, GROSSING_FILMS_OF_ALL_TIME){
+            headerAdapter.updateData(it)
+        }
 
-            val itemRandom = it.random().random()
-            /*Glide.with(this).load("$baseUrlImg${itemRandom.backdrop_path}").into(binding.posterImageView)
-            binding.titleTextView.text = itemRandom.title
-            binding.descriptionTextView.text = itemRandom.overview*/
-        })
+        viewModel.getMoviesList(context!!, MARVEL_UNIVERSE_MOVIES){
+            movieAdapterTwo.updateData(it)
+        }
+
+        viewModel.getMoviesList(context!!, FILMS_DEJA_VUS){
+            movieAdapterThree.updateData(it)
+        }
+
     }
 
     override fun onClickItem(item: Any, position: Int) {
@@ -100,7 +108,20 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
     override fun initRecyclerView() {
         binding.listOneRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        binding.listOneRecyclerView.adapter = movieAdapter
+        binding.listOneRecyclerView.adapter = movieAdapterOne
+
+        binding.listTwoRecyclerView.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.listTwoRecyclerView.adapter = movieAdapterTwo
+
+        binding.listThreeRecyclerView.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.listThreeRecyclerView.adapter = movieAdapterThree
+
+        /*viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer {
+            if (movieAdapter.isEmpty())
+                movieAdapter.updateData(it.last())
+        })*/
     }
 
     override fun initViewPager2() {
@@ -108,20 +129,21 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
         val handler = Handler()
 
         viewPager.adapter = headerAdapter
-        viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer { items ->
+        /*viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer { items ->
             headerAdapter.updateData(items.last())
-        })
+        })*/
 
-        viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 val runnable = Runnable {
-                    viewPager.currentItem = position+1
+                    viewPager.currentItem = position + 1
                     Log.e(TAG, "Siguiente poster")
                 }
                 if (position < viewPager.adapter?.itemCount ?: 0)
                     handler.postDelayed(runnable, 5000)
             }
+
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)
                 if (state == ViewPager2.SCROLL_STATE_DRAGGING)

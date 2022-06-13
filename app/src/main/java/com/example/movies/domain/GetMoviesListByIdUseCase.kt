@@ -17,8 +17,10 @@ class GetMoviesListByIdUseCase @Inject constructor(
     suspend operator fun invoke(id: Long, context: Context): List<Movie>? =
         if (CheckNetwork.isOnline(context)) {
             var items = movieService.getMoviesListFromAPI(id)
-            if (items.isNotEmpty())
+            if (items.isNotEmpty()) {
+                movieService.clearAllMovies()
                 movieService.insertAllMovies(items.map { it.toDatabase() })
+            }
             items
         } else {
             movieService.getMoviesListFromLocal()

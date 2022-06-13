@@ -54,5 +54,9 @@ class MovieService @Inject constructor(
         movieDAO.insertAll(items)
     }
 
+    suspend fun clearAllMovies(){
+        movieDAO.deleteAllMovies()
+    }
+
 
 }
