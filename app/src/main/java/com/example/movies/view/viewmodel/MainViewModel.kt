@@ -10,6 +10,7 @@ import com.example.movies.data.model.baseUrlImg
 import com.example.movies.domain.GetMovieByIdUseCase
 import com.example.movies.domain.GetMoviesListByIdUseCase
 import com.example.movies.domain.GetMoviesUseCase
+import com.example.movies.domain.model.Movie
 import com.example.movies.view.fragment.BEST_PICTURES_NOMINATIONS
 import com.example.movies.view.fragment.MARVEL_UNIVERSE_MOVIES
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,8 +26,9 @@ class MainViewModel @Inject constructor(
     //private val getMovieByIdUseCase: GetMovieByIdUseCase
 ):ViewModel() {
 
-    val moviesLiveData = MutableLiveData<List<MovieModel>>()
-    val moviesListLiveData = MutableLiveData<ArrayList<MoviesList>>()
+    val moviesLiveData = MutableLiveData<List<Movie>>()
+
+    val moviesListLiveData = MutableLiveData<ArrayList<List<Movie>>>()
 
     init {
         onCreate()
@@ -35,11 +37,11 @@ class MainViewModel @Inject constructor(
     private fun onCreate(){
 
         viewModelScope.launch {
-            val result: MoviesList? = getMoviesUseCase()
+            val result: List<Movie>? = getMoviesUseCase()
             Log.d(TAG, "getMoviesUseCase")
             if(result!=null){
                 Log.d(TAG, "MoviesList is not null")
-                moviesLiveData.postValue(result.items!!)
+                moviesLiveData.postValue(result)
             }
         }
 
@@ -54,13 +56,12 @@ class MainViewModel @Inject constructor(
 
     fun getMoviesList(){
         viewModelScope.launch {
-            val result: MoviesList? = getMoviesListByIdUseCase(BEST_PICTURES_NOMINATIONS)
+            val result: List<Movie>? = getMoviesListByIdUseCase(BEST_PICTURES_NOMINATIONS)
             Log.d(TAG, "getMoviesListByIdUseCase")
             if(result!=null){
-                val moviesListArray = moviesListLiveData.value ?: arrayListOf()
-                moviesListArray.add(result)
-                Log.d(TAG, "BEST_PICTURES_NOMINATIONS is not null")
-                moviesListLiveData.postValue(moviesListArray)
+                val currentList = moviesListLiveData.value ?: arrayListOf()
+                currentList.add(result)
+                moviesListLiveData.postValue(currentList)
             }
         }
     }

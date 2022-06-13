@@ -3,6 +3,8 @@ package com.example.movies.data
 import com.example.movies.data.dao.MovieDAO
 import com.example.movies.data.model.MovieModel
 import com.example.movies.data.model.MoviesList
+import com.example.movies.domain.model.Movie
+import com.example.movies.domain.model.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -12,24 +14,33 @@ class MovieService @Inject constructor(
     //private val movieDAO: MovieDAO
 ) {
 
-    suspend fun getAllMoviesFromAPI(): MoviesList? {
+    suspend fun getAllMoviesFromAPI(): List<Movie>? {
         return withContext(Dispatchers.IO) {
             val response = api.getAllMovies()
-            response.body()
+            val body = response.body() ?: MoviesList()
+            val item = body.items
+
+            item.map { it.toDomain() }
         }
     }
 
-    suspend fun getMovieByIdFromAPI(id: Long): MovieModel? {
+    suspend fun getMovieByIdFromAPI(id: Long): Movie? {
         return withContext(Dispatchers.IO) {
             val response = api.getMovieById(id)
-            response.body() ?: MovieModel()
+            val body = response.body() ?: MovieModel()
+            val item = body
+
+            item.toDomain()
         }
     }
 
-    suspend fun getMoviesListFromAPI(id: Long): MoviesList {
+    suspend fun getMoviesListFromAPI(id: Long): List<Movie>? {
         return withContext(Dispatchers.IO) {
             val response = api.getMoviesList(id)
-            response.body() ?: MoviesList()
+            val body = response.body() ?: MoviesList()
+            val item = body.items
+
+            item.map { it.toDomain() }
         }
     }
 

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING
 import com.example.movies.databinding.FragmentRecommendedBinding
+import com.example.movies.domain.model.Movie
 import com.example.movies.util.UIBehavior
 import com.example.movies.view.adapter.MoviesPosterViewPagerAdapter
 import com.example.movies.view.viewmodel.MainViewModel
@@ -61,7 +62,7 @@ class RecommendedFragment : Fragment(), UIBehavior {
         moviesPosterAdapter = MoviesPosterViewPagerAdapter()
         viewPager.adapter = moviesPosterAdapter
 
-        viewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { items ->
+        viewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { items: List<Movie> ->
             moviesPosterAdapter.updateData(items)
         })
 

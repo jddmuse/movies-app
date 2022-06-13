@@ -10,6 +10,7 @@ import com.example.movies.R
 import com.example.movies.data.model.MovieModel
 import com.example.movies.data.model.baseUrlImg
 import com.example.movies.databinding.ItemMovieBinding
+import com.example.movies.domain.model.Movie
 import com.example.movies.util.ItemActionListener
 import com.squareup.picasso.Picasso
 
@@ -19,7 +20,7 @@ class MovieAdapter(
     val itemActionListener: ItemActionListener
 ):RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    private val moviesList = mutableListOf<MovieModel>()
+    private val moviesList = mutableListOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -35,7 +36,7 @@ class MovieAdapter(
 
     override fun getItemCount(): Int = moviesList.size
 
-    fun updateData(items:List<MovieModel>){
+    fun updateData(items:List<Movie>){
         moviesList.clear()
         moviesList.addAll(items)
         Log.d(TAG, "updateData")
@@ -45,7 +46,7 @@ class MovieAdapter(
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
         val binding = ItemMovieBinding.bind(view)
 
-        fun bind(item: MovieModel){
+        fun bind(item: Movie){
             //binding.titleTextView.text = item.title
             //Picasso.get().load(item.backdrop_path).into(binding.movieImageView)
             Glide.with(itemView).load("$baseUrlImg${item.poster_path}").into(binding.movieImageView)

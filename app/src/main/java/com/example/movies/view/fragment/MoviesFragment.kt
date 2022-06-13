@@ -66,8 +66,7 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, ItemAc
         //viewModel.getMoviesList()
 
         viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer {
-            Log.e(TAG, "arraylist<MoviesList>.size= ${it.size}")
-            movieAdapter.updateData(it.last().items)
+            movieAdapter.updateData(it.last())
         })
     }
 
@@ -80,7 +79,6 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, ItemAc
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         binding.listOneRecyclerView.adapter = movieAdapter
     }
-
 
 
 }
