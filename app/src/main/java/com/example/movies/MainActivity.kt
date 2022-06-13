@@ -33,32 +33,9 @@ class MainActivity() : AppCompatActivity() {
 
     private fun initUI() {
         initBottomNavigationView()
-        //movieAdapter = MovieAdapter()
-        //initRecyclerView()
         //initViewPager()
 
-        /*viewModel.moviesLiveData.observe(this, Observer { items ->
-            movieAdapter.updateData(items)
-        })*/
     }
-
-    /*private fun initViewPager() {
-        val tabLayout = binding.tabLayout
-        val viewPager2 = binding.viewPager
-        val viewPagerAdapter = MainViewPagerAdapter(supportFragmentManager, lifecycle)
-        viewPagerAdapter.addFragment(RecommendedFragment(), "For you")
-        viewPagerAdapter.addFragment(MoviesFragment(), "Movies")
-        viewPagerAdapter.addFragment(TvFragment(), "TV")
-        viewPager2.adapter = viewPagerAdapter
-        TabLayoutMediator(tabLayout, viewPager2){ tab, position ->
-            when(position){
-                0 -> tab.text = "For you"
-                1 -> tab.text = "Movies"
-                2 -> tab.text = "TV"
-            }
-        }.attach()
-    }*/
-
 
     private fun initBottomNavigationView() {
         val bottomNavigationView = binding.bottomNavigation
@@ -93,4 +70,21 @@ class MainActivity() : AppCompatActivity() {
         }
 
     }
+
+    /*private fun initViewPager() {
+        val tabLayout = binding.tabLayout
+        val viewPager2 = binding.viewPager
+        val viewPagerAdapter = MainViewPagerAdapter(supportFragmentManager, lifecycle)
+        viewPagerAdapter.addFragment(RecommendedFragment(), "For you")
+        viewPagerAdapter.addFragment(MoviesFragment(), "Movies")
+        viewPagerAdapter.addFragment(TvFragment(), "TV")
+        viewPager2.adapter = viewPagerAdapter
+        TabLayoutMediator(tabLayout, viewPager2){ tab, position ->
+            when(position){
+                0 -> tab.text = "For you"
+                1 -> tab.text = "Movies"
+                2 -> tab.text = "TV"
+            }
+        }.attach()
+    }*/
 }

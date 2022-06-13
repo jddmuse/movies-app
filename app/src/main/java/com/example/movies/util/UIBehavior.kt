@@ -7,5 +7,9 @@ interface UIBehavior {
         fun initRecyclerView()
     }
 
+    interface ViewPager{
+        fun initViewPager2()
+    }
+
 
 }

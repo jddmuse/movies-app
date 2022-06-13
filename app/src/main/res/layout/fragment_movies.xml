@@ -6,55 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.MoviesFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/head"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/header_view_pager"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/poster_image_View"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.6"
-                android:background="@color/black" />
-
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/title_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:gravity="start"
-            android:maxLines="1"
-            android:text="name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/description_text_view" />
-
-        <TextView
-            android:id="@+id/description_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginBottom="@dimen/dp_16"
-            android:maxLines="3"
-            android:text="Description"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/title_list_one_text_view"
@@ -64,7 +20,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:text="2011 Oscar Nominations for Best Picture"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintTop_toBottomOf="@id/head" />
+        app:layout_constraintTop_toBottomOf="@id/header_view_pager" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_one_recycler_view"
