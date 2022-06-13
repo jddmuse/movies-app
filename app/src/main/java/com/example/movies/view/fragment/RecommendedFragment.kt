@@ -13,10 +13,12 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING
 import com.example.movies.databinding.FragmentRecommendedBinding
 import com.example.movies.domain.model.Movie
+import com.example.movies.util.CheckNetwork
 import com.example.movies.util.UIBehavior
 import com.example.movies.view.adapter.MoviesPosterViewPagerAdapter
 import com.example.movies.view.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.ArrayList
 
 const val TAG = "::RecommendedFragment -> "
 
@@ -53,6 +55,7 @@ class RecommendedFragment : Fragment(), UIBehavior {
 
     override fun initUI() {
         initViewPager2()
+        viewModel.getRecommendedMoviesList(context!!)
     }
 
     fun initViewPager2(){
@@ -62,8 +65,8 @@ class RecommendedFragment : Fragment(), UIBehavior {
         moviesPosterAdapter = MoviesPosterViewPagerAdapter()
         viewPager.adapter = moviesPosterAdapter
 
-        viewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { items: List<Movie> ->
-            moviesPosterAdapter.updateData(items)
+        viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer { items: ArrayList<List<Movie>> ->
+            moviesPosterAdapter.updateData(items.last())
         })
 
         viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){

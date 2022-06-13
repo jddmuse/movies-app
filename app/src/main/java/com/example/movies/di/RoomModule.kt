@@ -20,7 +20,7 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideRoom(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, TheMovieDatabase::class.java, THE_MOVIE_DATABASE)
+        Room.databaseBuilder(context, TheMovieDatabase::class.java, THE_MOVIE_DATABASE).build()
 
     @Singleton
     @Provides

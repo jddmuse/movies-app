@@ -61,9 +61,8 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, ItemAc
     override fun initUI() {
         movieAdapter = MovieAdapter(this)
         initRecyclerView()
-        //val provider = viewModel.moviesProvider
 
-        //viewModel.getMoviesList()
+        viewModel.getMoviesList(context!!)
 
         viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer {
             movieAdapter.updateData(it.last())

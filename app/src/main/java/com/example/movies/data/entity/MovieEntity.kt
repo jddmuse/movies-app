@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.movies.data.model.GenerModel
 import com.example.movies.data.model.ProductionCompanyModel
+import com.example.movies.domain.model.Movie
 
 @Entity(tableName = "movie")
 data class MovieEntity(
@@ -16,13 +17,28 @@ data class MovieEntity(
     @ColumnInfo(name = "original_title") val original_title: String,
     @ColumnInfo(name = "overview") val overview: String,
     @ColumnInfo(name = "title") val title: String,
-    //@ColumnInfo(name = "genres") var genres:MutableList<GenerModel> = mutableListOf<GenerModel>(),
     @ColumnInfo(name = "original_language") val original_language: String,
     @ColumnInfo(name = "popularity") val popularity: Float?,
     @ColumnInfo(name = "poster_path") val poster_path: String,
-    //@ColumnInfo(name = "production_companies") val production_companies: MutableList<ProductionCompanyModel> = mutableListOf<ProductionCompanyModel>(),
     @ColumnInfo(name = "release_date") val release_date: String,
     @ColumnInfo(name = "tagline") val tagline: String,
     @ColumnInfo(name = "video") val video: Boolean,
     @ColumnInfo(name = "vote_average") val vote_average: Float?
+)
+
+fun Movie.toDatabase() = MovieEntity(
+    id,
+    adult,
+    backdrop_path,
+    budget,
+    original_title,
+    overview,
+    title,
+    original_language,
+    popularity,
+    poster_path,
+    release_date,
+    tagline,
+    video,
+    vote_average
 )

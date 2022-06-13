@@ -1,5 +1,6 @@
 package com.example.movies.view.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,8 +27,6 @@ class MainViewModel @Inject constructor(
     //private val getMovieByIdUseCase: GetMovieByIdUseCase
 ):ViewModel() {
 
-    val moviesLiveData = MutableLiveData<List<Movie>>()
-
     val moviesListLiveData = MutableLiveData<ArrayList<List<Movie>>>()
 
     init {
@@ -36,17 +35,6 @@ class MainViewModel @Inject constructor(
 
     private fun onCreate(){
 
-        viewModelScope.launch {
-            val result: List<Movie>? = getMoviesUseCase()
-            Log.d(TAG, "getMoviesUseCase")
-            if(result!=null){
-                Log.d(TAG, "MoviesList is not null")
-                moviesLiveData.postValue(result)
-            }
-        }
-
-        getMoviesList()
-
     }
 
     override fun onCleared() {
@@ -54,15 +42,29 @@ class MainViewModel @Inject constructor(
         Log.e(TAG, "Info cleaned")
     }
 
-    fun getMoviesList(){
+    fun getMoviesList(context: Context){
         viewModelScope.launch {
-            val result: List<Movie>? = getMoviesListByIdUseCase(BEST_PICTURES_NOMINATIONS)
+            val result: List<Movie>? = getMoviesListByIdUseCase(BEST_PICTURES_NOMINATIONS, context)
             Log.d(TAG, "getMoviesListByIdUseCase")
             if(result!=null){
-                val currentList = moviesListLiveData.value ?: arrayListOf()
-                currentList.add(result)
-                moviesListLiveData.postValue(currentList)
+                updateData(result)
             }
         }
+    }
+
+    fun getRecommendedMoviesList(context: Context){
+        viewModelScope.launch {
+            val result: List<Movie>? = getMoviesUseCase(context)
+            Log.d(TAG, "getMoviesUseCase")
+            if(result!=null){
+                updateData(result)
+            }
+        }
+    }
+
+    private fun updateData(item: List<Movie>){
+        val currentList = moviesListLiveData.value ?: arrayListOf()
+        currentList.add(item)
+        moviesListLiveData.postValue(currentList)
     }
 }

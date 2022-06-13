@@ -1,6 +1,7 @@
 package com.example.movies.data
 
 import com.example.movies.data.dao.MovieDAO
+import com.example.movies.data.entity.MovieEntity
 import com.example.movies.data.model.MovieModel
 import com.example.movies.data.model.MoviesList
 import com.example.movies.domain.model.Movie
@@ -11,10 +12,10 @@ import javax.inject.Inject
 
 class MovieService @Inject constructor(
     private val api: MovieApiClient,
-    //private val movieDAO: MovieDAO
+    private val movieDAO: MovieDAO
 ) {
 
-    suspend fun getAllMoviesFromAPI(): List<Movie>? {
+    suspend fun getAllMoviesFromAPI(): List<Movie> {
         return withContext(Dispatchers.IO) {
             val response = api.getAllMovies()
             val body = response.body() ?: MoviesList()
@@ -24,7 +25,7 @@ class MovieService @Inject constructor(
         }
     }
 
-    suspend fun getMovieByIdFromAPI(id: Long): Movie? {
+    suspend fun getMovieByIdFromAPI(id: Long): Movie {
         return withContext(Dispatchers.IO) {
             val response = api.getMovieById(id)
             val body = response.body() ?: MovieModel()
@@ -34,7 +35,7 @@ class MovieService @Inject constructor(
         }
     }
 
-    suspend fun getMoviesListFromAPI(id: Long): List<Movie>? {
+    suspend fun getMoviesListFromAPI(id: Long): List<Movie> {
         return withContext(Dispatchers.IO) {
             val response = api.getMoviesList(id)
             val body = response.body() ?: MoviesList()
@@ -44,8 +45,13 @@ class MovieService @Inject constructor(
         }
     }
 
-    suspend fun getMoviesListFromLocal(){
+    suspend fun getMoviesListFromLocal(): List<Movie> {
+        val items:List<MovieEntity> = movieDAO.getAllMovies()
+        return items.map { it.toDomain() } ?: emptyList()
+    }
 
+    suspend fun insertAllMovies(items:List<MovieEntity>){
+        movieDAO.insertAll(items)
     }
 
 
