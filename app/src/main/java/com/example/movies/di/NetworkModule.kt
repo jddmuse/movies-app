@@ -68,4 +68,5 @@ object NetworkModule {
     fun provideMovieApiClient(retrofit: Retrofit):MovieApiClient
         = retrofit.create(MovieApiClient::class.java)
 
+
 }

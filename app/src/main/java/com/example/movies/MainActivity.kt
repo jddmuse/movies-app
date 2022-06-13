@@ -3,8 +3,6 @@ package com.example.movies
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import com.example.movies.data.MoviesProvider
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.view.adapter.MainViewPagerAdapter
 import com.example.movies.view.adapter.MovieAdapter

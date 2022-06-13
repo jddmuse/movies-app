@@ -1,7 +1,5 @@
 package com.example.movies.util
 
-import com.example.movies.data.MoviesProvider
-
 interface UIBehavior {
     fun initUI()
 
@@ -9,7 +7,5 @@ interface UIBehavior {
         fun initRecyclerView()
     }
 
-    interface MoviesList{
-        fun initMoviesLists(moviesProvider: MoviesProvider)
-    }
+
 }

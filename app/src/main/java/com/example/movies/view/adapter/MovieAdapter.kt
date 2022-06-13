@@ -19,7 +19,7 @@ class MovieAdapter(
     val itemActionListener: ItemActionListener
 ):RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    private val moviesList = arrayListOf<MovieModel>()
+    private val moviesList = mutableListOf<MovieModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -36,6 +36,7 @@ class MovieAdapter(
     override fun getItemCount(): Int = moviesList.size
 
     fun updateData(items:List<MovieModel>){
+        moviesList.clear()
         moviesList.addAll(items)
         Log.d(TAG, "updateData")
         notifyDataSetChanged()
@@ -45,7 +46,7 @@ class MovieAdapter(
         val binding = ItemMovieBinding.bind(view)
 
         fun bind(item: MovieModel){
-            binding.titleTextView.text = item.title
+            //binding.titleTextView.text = item.title
             //Picasso.get().load(item.backdrop_path).into(binding.movieImageView)
             Glide.with(itemView).load("$baseUrlImg${item.poster_path}").into(binding.movieImageView)
         }

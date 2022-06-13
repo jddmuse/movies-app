@@ -8,7 +8,6 @@ class MovieModel(
     val id:Int? = null,
     val adult:Boolean = false,
     val backdrop_path:String = "",
-    //val belongs_to_collection:Object? = null,
     val budget:Int? = null,
     val original_title:String = "",
     val overview:String ="",

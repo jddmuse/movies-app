@@ -21,7 +21,7 @@ private const val TAG = ":::MainViewModel -> "
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase,
-    private val getMoviesListByIdUseCase: GetMoviesListByIdUseCase,
+    private val getMoviesListByIdUseCase: GetMoviesListByIdUseCase
     //private val getMovieByIdUseCase: GetMovieByIdUseCase
 ):ViewModel() {
 
@@ -43,25 +43,25 @@ class MainViewModel @Inject constructor(
             }
         }
 
-        viewModelScope.launch {
-            val result: MoviesList? = getMoviesListByIdUseCase(BEST_PICTURES_NOMINATIONS)
-            Log.d(TAG, "getMoviesListByIdUseCase")
-            if(result!=null){
-                Log.d(TAG, "BEST_PICTURES_NOMINATIONS is not null")
-                moviesListLiveData.value?.add(result)
-            }
-        }
+        getMoviesList()
 
-        /*Log.d(TAG, "getMovieByIdUseCase")
-        viewModelScope.launch {
-            val result: MovieModel? = getMovieByIdUseCase(100)
-            if(result!=null)
-                Log.e(TAG, "title= ${result.title}, img= $baseUrlImg${result.backdrop_path}, gener=${result.genres.size}")
-        }*/
     }
 
     override fun onCleared() {
         super.onCleared()
         Log.e(TAG, "Info cleaned")
+    }
+
+    fun getMoviesList(){
+        viewModelScope.launch {
+            val result: MoviesList? = getMoviesListByIdUseCase(BEST_PICTURES_NOMINATIONS)
+            Log.d(TAG, "getMoviesListByIdUseCase")
+            if(result!=null){
+                val moviesListArray = moviesListLiveData.value ?: arrayListOf()
+                moviesListArray.add(result)
+                Log.d(TAG, "BEST_PICTURES_NOMINATIONS is not null")
+                moviesListLiveData.postValue(moviesListArray)
+            }
+        }
     }
 }

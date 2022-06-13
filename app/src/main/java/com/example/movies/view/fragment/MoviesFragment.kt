@@ -1,6 +1,7 @@
 package com.example.movies.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movies.R
-import com.example.movies.data.MoviesProvider
 import com.example.movies.data.model.MovieModel
 import com.example.movies.databinding.FragmentMoviesBinding
 import com.example.movies.util.ItemActionListener
@@ -61,15 +60,13 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, ItemAc
 
     override fun initUI() {
         movieAdapter = MovieAdapter(this)
-        val moviesProvider = MoviesProvider()
-        
-        var list = emptyList<MovieModel>()
-        if(moviesProvider.moviesListArray.size>0){
-            list = moviesProvider.moviesListArray.last().items
-            movieAdapter.updateData(list)
-        }
+        initRecyclerView()
+        //val provider = viewModel.moviesProvider
+
+        //viewModel.getMoviesList()
 
         viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer {
+            Log.e(TAG, "arraylist<MoviesList>.size= ${it.size}")
             movieAdapter.updateData(it.last().items)
         })
     }
@@ -83,5 +80,7 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, ItemAc
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         binding.listOneRecyclerView.adapter = movieAdapter
     }
+
+
 
 }
