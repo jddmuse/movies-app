@@ -32,6 +32,9 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = moviesList[position]
         holder.bind(movie)
+        holder.itemView.setOnClickListener {
+            itemActionListener.onClickItem(movie, position)
+        }
     }
 
     override fun getItemCount(): Int = moviesList.size

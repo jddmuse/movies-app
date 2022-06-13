@@ -1,4 +1,4 @@
-package com.example.movies.data
+package com.example.movies.data.network
 
 import com.example.movies.data.model.MovieModel
 import com.example.movies.data.model.MoviesList

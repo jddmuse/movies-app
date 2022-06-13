@@ -3,8 +3,7 @@ package com.example.movies.domain
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.movies.data.MovieService
-import com.example.movies.data.model.MoviesList
+import com.example.movies.data.network.MovieService
 import com.example.movies.domain.model.Movie
 import com.example.movies.util.CheckNetwork
 import javax.inject.Inject

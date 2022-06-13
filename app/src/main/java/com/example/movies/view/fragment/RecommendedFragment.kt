@@ -65,7 +65,7 @@ class RecommendedFragment : Fragment(), UIBehavior {
         moviesPosterAdapter = MoviesPosterViewPagerAdapter()
         viewPager.adapter = moviesPosterAdapter
 
-        viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer { items: ArrayList<List<Movie>> ->
+        viewModel.moviesListLiveData.observe(viewLifecycleOwner, Observer { items->
             moviesPosterAdapter.updateData(items.last())
         })
 

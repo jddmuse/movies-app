@@ -4,6 +4,7 @@ import com.example.movies.data.entity.MovieEntity
 import com.example.movies.data.model.GenerModel
 import com.example.movies.data.model.MovieModel
 import com.example.movies.data.model.ProductionCompanyModel
+import java.io.Serializable
 
 data class Movie(
     val id: Int?,
@@ -20,7 +21,7 @@ data class Movie(
     val tagline: String,
     val video: Boolean,
     val vote_average: Float?
-)
+):Serializable
 
 fun MovieModel.toDomain() = Movie(
     id,

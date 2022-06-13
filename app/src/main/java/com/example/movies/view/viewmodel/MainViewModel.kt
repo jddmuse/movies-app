@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(
     //private val getMovieByIdUseCase: GetMovieByIdUseCase
 ):ViewModel() {
 
-    val moviesListLiveData = MutableLiveData<ArrayList<List<Movie>>>()
+    val moviesListLiveData = MutableLiveData<MutableList<List<Movie>>>()
 
     init {
         onCreate()

@@ -1,6 +1,6 @@
 package com.example.movies.di
 
-import com.example.movies.data.MovieApiClient
+import com.example.movies.data.network.MovieApiClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,7 +65,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMovieApiClient(retrofit: Retrofit):MovieApiClient
+    fun provideMovieApiClient(retrofit: Retrofit): MovieApiClient
         = retrofit.create(MovieApiClient::class.java)
 
 
