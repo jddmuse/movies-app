@@ -8,7 +8,8 @@
     android:layout_marginBottom="@dimen/dp_4"
     app:cardCornerRadius="@dimen/dp_8"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardElevation="@dimen/dp_4">
 
     <FrameLayout
         android:layout_width="match_parent"

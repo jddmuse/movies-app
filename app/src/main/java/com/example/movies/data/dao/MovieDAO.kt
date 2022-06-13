@@ -10,7 +10,7 @@ import com.example.movies.data.model.MovieModel
 @Dao
 interface MovieDAO {
 
-    @Query("SELECT * FROM movie LIMIT 10")
+    @Query("SELECT * FROM movie")
     suspend fun getAllMovies():List<MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -31,12 +31,14 @@ class MainActivity() : AppCompatActivity() {
         initUI()
     }
 
+    //inicializa los componentes necesarios
     private fun initUI() {
         initBottomNavigationView()
         //initViewPager()
 
     }
 
+    //inicializa el initBottomNavigationView
     private fun initBottomNavigationView() {
         val bottomNavigationView = binding.bottomNavigation
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

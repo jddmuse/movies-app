@@ -22,7 +22,7 @@ import com.example.movies.view.adapter.MovieAdapter
 import com.example.movies.view.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-//id de listas de peliculas
+//id de listas de peliculas (se usan para consultar listas ya existentes en la API)
 const val MARVEL_UNIVERSE_MOVIES: Long = 1
 const val BEST_PICTURES_NOMINATIONS: Long = 4
 const val THE_AVENGERS: Long = 5
@@ -71,15 +71,20 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
         initUI()
     }
 
+    //inicializa los componentes necesarios
     override fun initUI() {
+
+        //inicializamos los adaptadores
         movieAdapterOne = MovieAdapter(this)
         movieAdapterTwo = MovieAdapter(this)
         movieAdapterThree = MovieAdapter(this)
         headerAdapter = HeaderMoviesViewPagerAdapter()
 
+        //inicializamos los componenetes
         initRecyclerView()
         initViewPager2()
 
+        //Listeners
         viewModel.getMoviesList(context!!, BEST_PICTURES_NOMINATIONS){
             movieAdapterOne.updateData(it)
         }
@@ -98,6 +103,7 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
 
     }
 
+    //listener para los adapters
     override fun onClickItem(item: Any, position: Int) {
         val intent = Intent(context, MovieDetailsActivity::class.java).apply {
             putExtra("movie", item as Movie)
@@ -105,6 +111,7 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
         startActivity(intent)
     }
 
+    //inicializa los recyclerView
     override fun initRecyclerView() {
         binding.listOneRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -124,6 +131,7 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
         })*/
     }
 
+    //inicializa el viewPager2 (encabezado)
     override fun initViewPager2() {
         val viewPager = binding.headerViewPager
         val handler = Handler()
@@ -133,12 +141,13 @@ class MoviesFragment() : Fragment(), UIBehavior, UIBehavior.RecyclerView, UIBeha
             headerAdapter.updateData(items.last())
         })*/
 
+        //Funcionalidad adicional: AUTO-SCROLL en el viewPager2
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 val runnable = Runnable {
                     viewPager.currentItem = position + 1
-                    Log.e(TAG, "Siguiente poster")
+                    //Log.e(TAG, "Siguiente poster")
                 }
                 if (position < viewPager.adapter?.itemCount ?: 0)
                     handler.postDelayed(runnable, 5000)

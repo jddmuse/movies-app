@@ -31,5 +31,9 @@ class MovieDetailsActivity : AppCompatActivity(), UIBehavior {
             .into(binding.posterImageView)
         binding.titleTextView.text = item.title
         binding.descriptionTextView.text = item.overview
+        binding.dateTextView.text = "Publicación: ${item.release_date}"
+        binding.popularityTextView.text = "Popularidad: ${item.popularity}"
+        binding.averageTextView.text = "Puntuación promedio: ${item.vote_average}"
+
     }
 }

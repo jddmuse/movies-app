@@ -47,6 +47,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/poster_card_view" />
 
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="Publicacion: "
+            app:layout_constraintStart_toEndOf="@id/poster_card_view"
+            app:layout_constraintTop_toBottomOf="@id/frame_layout" />
+
+        <TextView
+            android:id="@+id/popularity_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:text="Duracion: "
+            app:layout_constraintStart_toEndOf="@id/poster_card_view"
+            app:layout_constraintTop_toBottomOf="@id/date_text_view" />
+
+        <TextView
+            android:id="@+id/average_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:text="Promedio: "
+            app:layout_constraintStart_toEndOf="@id/poster_card_view"
+            app:layout_constraintTop_toBottomOf="@id/popularity_text_view" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/poster_card_view"
             android:layout_width="@dimen/dp_120"
@@ -54,6 +82,7 @@
             android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_100"
             app:cardCornerRadius="@dimen/dp_8"
+            app:cardElevation="@dimen/dp_8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
