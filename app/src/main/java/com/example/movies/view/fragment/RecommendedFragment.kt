@@ -25,6 +25,10 @@ const val TAG = "::RecommendedFragment -> "
 @AndroidEntryPoint
 class RecommendedFragment : Fragment(), UIBehavior {
 
+    companion object{
+        val instance = RecommendedFragment()
+    }
+
     private var _binding:FragmentRecommendedBinding? = null
     private val binding get() = _binding!!
 
